@@ -23,7 +23,7 @@ export class TaskService {
                 id
             }
         }))
-        if(!taskExists) CustomError.notFound(`task with id: ${id} not found`)
+        if(!taskExists) throw CustomError.notFound(`task with id: ${id} not found`)
 
         const taskDeleted = await prisma.tasks.delete({
             where: {

@@ -9,15 +9,15 @@ export class CustomError extends Error{
     }
 
     public static badRequest(message: string){
-        throw new CustomError(400, message)
+        return new CustomError(400, message)
     }    
 
     public static notFound(message: string){
-        throw new CustomError(404, message)
+        return new CustomError(404, message)
     }
 
     public static conflict(message: string){
-        throw new CustomError(409, message)
+        return new CustomError(409, message)
     }
 
     public static showError(error: unknown, res: Response) {

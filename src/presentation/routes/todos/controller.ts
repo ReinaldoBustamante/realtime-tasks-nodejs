@@ -20,11 +20,11 @@ export class TasksController {
     public createTask = async (req: Request, res: Response) => {
         const [error, createTaskDto] = CreateTaskDto.create(req.body)
         try{
-            if(error) CustomError.badRequest(error);
+            if(error) throw CustomError.badRequest(error);
             const task = await this.taskServices.createTask(createTaskDto!)
             res.json(task)
         } catch (error){
-            CustomError.showError(error, res)
+            throw CustomError.showError(error, res)
         }
     }
 
@@ -34,7 +34,7 @@ export class TasksController {
             const taskDeleted = await this.taskServices.deleteTask(id)
             res.json(taskDeleted)
         } catch (error) {
-            CustomError.showError(error, res)
+            throw CustomError.showError(error, res)
         }
     }
 }
