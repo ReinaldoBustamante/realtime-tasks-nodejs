@@ -1,13 +1,15 @@
 import { Request, Response } from 'express'
 import { CreateTaskDto } from '../../../domain/dtos/createTask.dto'
 import { CustomError } from '../../../domain/errors/custom.error'
-import { prisma } from '../../../config/db/connection'
+import { TaskService } from '../../../domain/service/tasks.service'
 
 export class TasksController {
-    constructor() {}
+    constructor(
+        private taskServices: TaskService
+    ) {}
 
     public getTasks = async (req: Request, res: Response) => {
-        const tasks = await prisma.tasks.findMany()
+        const tasks = await this.taskServices.getTasks()
         res.json(tasks)
     }
 
@@ -15,9 +17,7 @@ export class TasksController {
         const [error, createTaskDto] = CreateTaskDto.create(req.body)
         try{
             if(error) CustomError.badRequest(error);
-            const task = await prisma.tasks.create({
-                data: createTaskDto!
-            })
+            const task = await this.taskServices.createTask(createTaskDto!)
             res.json(task)
         } catch (error){
             if(error instanceof CustomError){
