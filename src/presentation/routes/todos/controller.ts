@@ -9,8 +9,12 @@ export class TasksController {
     ) {}
 
     public getTasks = async (req: Request, res: Response) => {
-        const tasks = await this.taskServices.getTasks()
-        res.json(tasks)
+        try{
+            const tasks = await this.taskServices.getTasks()
+            res.json(tasks)
+        } catch (error) {
+            CustomError.showError(error, res)
+        }
     }
 
     public createTask = async (req: Request, res: Response) => {
@@ -20,11 +24,7 @@ export class TasksController {
             const task = await this.taskServices.createTask(createTaskDto!)
             res.json(task)
         } catch (error){
-            if(error instanceof CustomError){
-                res.status(error.statusCode).json({error: error.message})
-            } else {
-                res.status(500).json({error: 'internal server error'})
-            }
+            CustomError.showError(error, res)
         }
     }
 }
