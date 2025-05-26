@@ -6,9 +6,10 @@ export class TasksRoutes {
     public static router(){
         const router = Router();
         const tasksController = new TasksController();
-       
-        router.get('/', tasksController.getTodos)
-
+        
+        router.get('/', tasksController.getTasks)
+        router.post('/', tasksController.createTask)
+        
         return router
     }
 }
