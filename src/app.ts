@@ -1,3 +1,4 @@
+import { AppRoutes } from "./presentation/routes/router";
 import { ServerApp } from "./presentation/server"
 
 
@@ -6,6 +7,6 @@ import { ServerApp } from "./presentation/server"
 })()
 
 function main(): void{
-    const serverApp = new ServerApp();
+    const serverApp = new ServerApp(3000, AppRoutes.router());
     serverApp.start()
 }
