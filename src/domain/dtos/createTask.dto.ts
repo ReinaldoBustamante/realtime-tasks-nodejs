@@ -1,7 +1,7 @@
 export class CreateTaskDto {
     constructor(
         public title: string,
-        public description: string
+        public description?: string
     ){}
 
     public static create( object: {[key:string]: any} ): [string?, CreateTaskDto?]{

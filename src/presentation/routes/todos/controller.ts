@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import { CreateTaskDto } from '../../../domain/dtos/createTask.dto'
 import { CustomError } from '../../../domain/errors/custom.error'
 import { TaskService } from '../../../domain/service/tasks.service'
+import { UpdateTaskDto } from '../../../domain/dtos/updateTask.dto'
 
 export class TasksController {
     constructor(
@@ -24,7 +25,7 @@ export class TasksController {
             const task = await this.taskServices.createTask(createTaskDto!)
             res.json(task)
         } catch (error){
-            throw CustomError.showError(error, res)
+            CustomError.showError(error, res)
         }
     }
 
@@ -34,7 +35,19 @@ export class TasksController {
             const taskDeleted = await this.taskServices.deleteTask(id)
             res.json(taskDeleted)
         } catch (error) {
-            throw CustomError.showError(error, res)
+            CustomError.showError(error, res)
+        }
+    }
+
+    public updateTask = async (req: Request, res: Response) => {
+        const id = +req.params.id
+        const [error, updateTaskDto] = UpdateTaskDto.create(req.body)
+        try{
+            if(error) throw CustomError.badRequest(error)
+            const taskUpdated = await this.taskServices.updateTask(id, updateTaskDto!)
+            res.json(taskUpdated);
+        } catch (error) {
+            CustomError.showError(error, res)
         }
     }
 }
