@@ -1,5 +1,6 @@
 import { prisma } from "../../config/db/connection";
 import { CreateTaskDto } from "../dtos/createTask.dto";
+import { CustomError } from "../errors/custom.error";
 
 export class TaskService {
     constructor(){}
@@ -14,5 +15,22 @@ export class TaskService {
             data: createTaskDto
         })
         return task
+    }
+
+    public async deleteTask(id: number){
+        const taskExists = !!(await prisma.tasks.findUnique({
+            where: {
+                id
+            }
+        }))
+        if(!taskExists) CustomError.notFound(`task with id: ${id} not found`)
+
+        const taskDeleted = await prisma.tasks.delete({
+            where: {
+                id
+            }
+        })
+        
+        return taskDeleted
     }
 }

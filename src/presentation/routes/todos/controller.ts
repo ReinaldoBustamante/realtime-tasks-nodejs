@@ -27,4 +27,14 @@ export class TasksController {
             CustomError.showError(error, res)
         }
     }
+
+    public deleteTask = async (req: Request, res: Response) => {
+        const id = +req.params.id
+        try {
+            const taskDeleted = await this.taskServices.deleteTask(id)
+            res.json(taskDeleted)
+        } catch (error) {
+            CustomError.showError(error, res)
+        }
+    }
 }

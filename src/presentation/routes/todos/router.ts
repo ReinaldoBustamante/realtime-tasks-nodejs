@@ -9,9 +9,9 @@ export class TasksRoutes {
         const taskService = new TaskService();
         const tasksController = new TasksController(taskService);
 
-        router.get('/', tasksController.getTasks)
-        router.post('/', tasksController.createTask)
-        
+        router.get('/', tasksController.getTasks);
+        router.post('/', tasksController.createTask);
+        router.delete('/:id', tasksController.deleteTask);
         return router
     }
 }
