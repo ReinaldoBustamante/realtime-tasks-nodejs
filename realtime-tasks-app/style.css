@@ -1,0 +1,60 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    padding: 24px;
+}
+
+main{
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+main form{
+    width: 100%;
+    display: flex;
+    gap: 6px;
+    flex-direction: column;
+}
+
+main input{
+    padding: 6px;
+}
+
+main form button {
+    padding: 6px;
+}
+
+.task-list{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    gap: 6px;
+}
+
+.tasks{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap: 6px;
+}
+
+.tasks .task{
+    border: 1px solid gray;
+    padding: 6px;
+    border-radius: 6px;
+}
