@@ -1,4 +1,7 @@
 import express, { Router } from 'express'
+import cors from 'cors'
+import { createServer } from 'node:http'
+import { wssInstance } from '../domain/service/wss.service';
 
 export class ServerApp {
     constructor(
@@ -8,11 +11,15 @@ export class ServerApp {
 
     public start(): void {
         const app = express();
+        app.use(cors())
         app.use(express.json())
+
+        const server = createServer(app)
+        wssInstance.initializeWebSocket(server)
 
         app.use('/api', this.routes)
         
-        app.listen(3000, () => {
+        server.listen(3000, () => {
             console.log('Server listening on port 3000')
         })
     }
