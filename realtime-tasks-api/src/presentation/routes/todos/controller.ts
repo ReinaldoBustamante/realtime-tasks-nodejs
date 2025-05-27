@@ -3,7 +3,7 @@ import { CreateTaskDto } from '../../../domain/dtos/createTask.dto'
 import { CustomError } from '../../../domain/errors/custom.error'
 import { TaskService } from '../../../domain/service/tasks.service'
 import { UpdateTaskDto } from '../../../domain/dtos/updateTask.dto'
-import { wssInstance, WssService } from '../../../domain/service/wss.service'
+import { wssInstance } from '../../../domain/service/wss.service'
 
 export class TasksController {
     constructor(

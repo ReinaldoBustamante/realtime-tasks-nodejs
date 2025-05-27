@@ -1,0 +1,27 @@
+services:
+  realtime-tasks-api:
+    build:
+      context: ./realtime-tasks-api
+      dockerfile: Dockerfile
+    container_name: realtime-tasks-api
+    ports:
+      - 3000:3000
+    networks:
+      - realtime-tasks-network
+    command: sh -c "npx prisma migrate dev --name init && npm run dev"
+    environment:
+      - DATABASE_URL=$DATABASE_URL
+  
+  realtime-tasks-app:
+    build:
+      context: ./realtime-tasks-app
+      dockerfile: Dockerfile
+    container_name: realtime-tasks-app
+    ports:
+      - 80:80
+    networks:
+      - realtime-tasks-network
+    depends_on:
+      - realtime-tasks-api
+networks:
+  realtime-tasks-network:
