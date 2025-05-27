@@ -3,6 +3,7 @@ import { CreateTaskDto } from '../../../domain/dtos/createTask.dto'
 import { CustomError } from '../../../domain/errors/custom.error'
 import { TaskService } from '../../../domain/service/tasks.service'
 import { UpdateTaskDto } from '../../../domain/dtos/updateTask.dto'
+import { wssInstance, WssService } from '../../../domain/service/wss.service'
 
 export class TasksController {
     constructor(
@@ -23,6 +24,10 @@ export class TasksController {
         try{
             if(error) throw CustomError.badRequest(error);
             const task = await this.taskServices.createTask(createTaskDto!)
+            wssInstance.broadcast({
+                type: 'newTask',
+                payload: task
+            })
             res.json(task)
         } catch (error){
             CustomError.showError(error, res)
@@ -33,6 +38,10 @@ export class TasksController {
         const id = +req.params.id
         try {
             const taskDeleted = await this.taskServices.deleteTask(id)
+            wssInstance.broadcast({
+                type: 'taskDeleted',
+                payload: taskDeleted
+            })
             res.json(taskDeleted)
         } catch (error) {
             CustomError.showError(error, res)
@@ -45,6 +54,10 @@ export class TasksController {
         try{
             if(error) throw CustomError.badRequest(error)
             const taskUpdated = await this.taskServices.updateTask(id, updateTaskDto!)
+            wssInstance.broadcast({
+                type: 'taskUpdated',
+                payload: taskUpdated
+            })
             res.json(taskUpdated);
         } catch (error) {
             CustomError.showError(error, res)
