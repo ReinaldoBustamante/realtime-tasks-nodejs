@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { TasksRoutes } from "./todos/router";
+import { TasksRoutes } from "./tasks/router";
 
 export class AppRoutes {
     constructor(){}
