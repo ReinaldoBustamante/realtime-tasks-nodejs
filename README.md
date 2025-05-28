@@ -101,4 +101,63 @@ Para ejecutar la API manualmente, se deberá hacer lo siguiente:
     ``` 
 ## ▶️ Ejecución de la aplicación
 
-Una vez configurado el entorno, 
+La ejecucion dependera de como se configuro el entorno. 
+
+### Ejecucion backend + frontend ( Docker ).
+Ejecute el siguiente comando en la raiz del proyecto.
+```
+docker compose up
+```
+
+Esto construira y levantará automaticamente los contenedores definidos en `docker-compose.yml`. Una vez levantados los servicios se podra acceder mediante:
+- API: http://localhost:3000/api
+- Interfaz web: http://localhost:8080
+
+#### Probar WebSockets
+### Ejecucion solo de la API
+#### Probar WebSockets
+### Endpoints
+- GET /tasks
+    - **Descripcion**: Obtiene la lista de tareas del sistema
+    - **Methodo HTTP**: GET
+    - **Ejemplo de request**:
+
+        ```
+        curl -X GET http://localhost:3000/api/tasks
+        ```
+- POST /tasks
+    - **Descripcion**: Crea una nueva tarea en el sistema
+    - **Methodo HTTP**: POST
+    - **Campos (JSON)**:
+        | Campo     | Tipo    | Requerido | Descripción                           |
+        |---------------|---------|-----------|---------------------------------------|
+        | `title`          | string  | Sí        | ID de la tarea                        |
+        | `description`          | string  | No        | Descripcion de la tarea                      |
+        | `status`          | string  | No        | Estado de la tarea (pendiente o completada)                        |
+    - **Ejemplo de request**:
+
+        ```
+        curl \ 
+        -X POST http://localhost:3000/api/tasks \ 
+        -H "Content-Type: application/json" \
+        -d '{"title": "Nueva tarea"}'
+        ```
+- PUT /tasks/:id
+    - **Descripcion**: Actualiza una tarea existente
+    - **Methodo HTTP**: PUT
+    - **Parametros de la url**:
+        | Parametro     | Tipo    | Requerido | Descripción                           |
+        |---------------|---------|-----------|---------------------------------------|
+        | `id`          | int  | Sí        | ID de la tarea                        |
+    - **Campos (JSON)**:
+        | Campo     | Tipo    | Requerido | Descripción                           |
+        |---------------|---------|-----------|---------------------------------------|
+        | `title`          | string  | No        | ID de la tarea                        |
+        | `description`          | string  | No        | Descripcion de la tarea                      |
+        | `status`          | string  | No        | Estado de la tarea (pendiente o completada)                        |
+    - **Ejemplo de request**:
+
+        ```
+        curl -X PUT http://localhost:3000/api/tasks/id -H "Content-Type: application/json" -d '{"title": "Nueva tarea actualizada", "status": "completed"}'
+        ```
+
