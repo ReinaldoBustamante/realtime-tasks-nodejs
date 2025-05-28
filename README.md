@@ -35,13 +35,20 @@ realtime-tasks-nodejs
 │   │   │       └── connection.ts
 │   │   ├── domain/  
 │   │   │   ├── dtos/  
-│   │   │   │    ├── createTask.dto.ts
-│   │   │   │    └── updateTask.dto.ts
+│   │   │   │   ├── createTask.dto.ts
+│   │   │   │   └── updateTask.dto.ts
 │   │   │   ├── errors/  
-│   │   │   │    └── custom.error.ts
+│   │   │   │   └── custom.error.ts
 │   │   │   └── services/  
-│   │   │       
-│   │   └── presentation/        
+│   │   │       ├── tasks.service.ts
+│   │   │       └── wss.service.ts  
+│   │   └── presentation/    
+│   │       ├── server.ts     
+│   │       └── routes/    
+│   │           ├── router.ts
+│   │           └── todos/  
+│   │               ├── controller.ts
+│   │               └── router.ts
 │
 ├── realtime-tasks-app/
 │   ├── Dockerfile
