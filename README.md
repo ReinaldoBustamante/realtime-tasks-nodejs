@@ -15,7 +15,40 @@ Aplicación para gestionar tareas en tiempo real con WebSockets. Construida con 
 - **Entorno de ejecución**: Se utilizó Docker para garantizar un entorno de ejecución replicable y homogéneo
 
 ## 📁 Estructura del proyecto
-
+```bash
+realtime-tasks-nodejs
+│
+├── docker-compose.yml
+├── .env.template
+│
+├── realtime-tasks-api/
+│   ├── Dockerfile
+│   ├── package.json  
+│   ├── tsconfig.json
+│   ├── .dockerignore 
+│   ├── prisma/
+│   │   └── schema.prisma
+│   ├── src/
+│   │   ├── app.ts 
+│   │   ├── config/
+│   │   │   └── db/  
+│   │   │       └── connection.ts
+│   │   ├── domain/  
+│   │   │   ├── dtos/  
+│   │   │   │    ├── createTask.dto.ts
+│   │   │   │    └── updateTask.dto.ts
+│   │   │   ├── errors/  
+│   │   │   │    └── custom.error.ts
+│   │   │   └── services/  
+│   │   │       
+│   │   └── presentation/        
+│
+├── realtime-tasks-app/
+│   ├── Dockerfile
+│   ├── index.html
+│   ├── main.js
+│   └── styles.css    
+```
 
 ## ⚙️ Configuración del entorno
 
