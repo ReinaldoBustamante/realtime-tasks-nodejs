@@ -158,6 +158,21 @@ Esto construira y levantará automaticamente los contenedores definidos en `dock
     - **Ejemplo de request**:
 
         ```
-        curl -X PUT http://localhost:3000/api/tasks/id -H "Content-Type: application/json" -d '{"title": "Nueva tarea actualizada", "status": "completed"}'
+        curl -X PUT http://localhost:3000/api/tasks/id \
+        -H "Content-Type: application/json" \
+        -d '{"title": "Nueva tarea actualizada", "status": "completed"}'
         ```
 
+- DELETE /tasks/:id
+    - **Descripcion**: Elimina una tarea existente
+    - **Methodo HTTP**: DELETE
+    - **Parametros de la url**:
+        | Parametro     | Tipo    | Requerido | Descripción                           |
+        |---------------|---------|-----------|---------------------------------------|
+        | `id`          | int  | Sí        | ID de la tarea                        |
+                    
+    - **Ejemplo de request**:
+
+        ```
+        curl -X DELETE http://localhost:3000/api/tasks/id
+        ```
