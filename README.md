@@ -1,4 +1,4 @@
-# realtime-todo-api
+# realtime-tasks-nodejs
 
 Aplicación para gestionar tareas en tiempo real con WebSockets. Construida con Node.js y Express
 
@@ -59,4 +59,46 @@ realtime-tasks-nodejs
 
 ## ⚙️ Configuración del entorno
 
+La aplicación esta configurada para ejecutarse mediante Docker. Para ello, sigue estos pasos:
+- Instala [Docker](https://docs.docker.com/get-started/get-docker/) si aun no lo tienes
+- Clona el repositorio
+
+    ```
+    git clone https://github.com/ReinaldoBustamante/realtime-tasks-nodejs.git
+    ```
+- Accede al directorio del proyecto
+    
+    ```
+    cd realtime-tasks-nodejs
+    ```
+
+- En la raiz del proyecto, crea un archivo `.env` a partir del `.env.template` con la variable:
+
+    ```
+    DATABASE_URL="file:./dev.db"
+    ```
+
+---
+> **Importante:** La siguiente configuración es solo por si se desea ejecutar únicamente la API sin el frontend.
+
+Para ejecutar la API manualmente, se deberá hacer lo siguiente:
+- En la carpeta `realtime-tasks-api/`, crea un archivo `.env`a partir del `.env.template` con la variable:
+
+    ```
+    DATABASE_URL="file:./dev.db"
+    ```
+- Accede al directorio realtime-tasks-api/
+    ```
+    cd realtime-tasks-api
+    ```
+- Instala las dependencias del proyecto :
+    ```bash
+    npm install
+    ``` 
+- Crea la migración y generar el cliente de Prisma:
+    ```bash
+    npx prisma migrate dev
+    ``` 
 ## ▶️ Ejecución de la aplicación
+
+Una vez configurado el entorno, 
