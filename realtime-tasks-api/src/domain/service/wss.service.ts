@@ -8,7 +8,7 @@ export class WssService {
     constructor(){}
     
     public initializeWebSocket(server: Server){      
-        if(!server) throw CustomError.badRequest('error en el servidor') 
+        if(!server) throw CustomError.internal('internal server error') 
 
         this.wss = new WebSocketServer({ server })
         this.wss.on('connection', (ws: WebSocket) => {

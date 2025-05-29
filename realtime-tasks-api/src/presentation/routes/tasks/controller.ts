@@ -28,7 +28,7 @@ export class TasksController {
                 type: 'newTask',
                 payload: task
             })
-            res.json(task)
+            res.status(201).json(task)
         } catch (error){
             CustomError.showError(error, res)
         }
@@ -37,6 +37,7 @@ export class TasksController {
     public deleteTask = async (req: Request, res: Response) => {
         const id = +req.params.id
         try {
+            if(isNaN(id) || id < 0) throw CustomError.badRequest('id parameter must be a number greater than 0.')
             const taskDeleted = await this.taskServices.deleteTask(id)
             wssInstance.broadcast({
                 type: 'taskDeleted',
@@ -52,7 +53,9 @@ export class TasksController {
         const id = +req.params.id
         const [error, updateTaskDto] = UpdateTaskDto.create(req.body)
         try{
+            if(isNaN(id) || id < 0) throw CustomError.badRequest('id parameter must be a number greater than 0.')
             if(error) throw CustomError.badRequest(error)
+
             const taskUpdated = await this.taskServices.updateTask(id, updateTaskDto!)
             wssInstance.broadcast({
                 type: 'taskUpdated',

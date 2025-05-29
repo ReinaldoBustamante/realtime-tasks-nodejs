@@ -19,7 +19,11 @@ export class CustomError extends Error{
     public static conflict(message: string){
         return new CustomError(409, message)
     }
-
+    
+    public static internal(message: string){
+        return new CustomError(500, message)
+    }
+    
     public static showError(error: unknown, res: Response) {
         if (error instanceof CustomError) {
             res.status(error.statusCode).json({ error: error.message })
