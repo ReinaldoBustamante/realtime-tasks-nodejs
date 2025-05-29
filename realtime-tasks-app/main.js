@@ -43,7 +43,7 @@ const updateTask = async (id) => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            status: 'completed'
+            status: 'completada'
         })
     })
 }
