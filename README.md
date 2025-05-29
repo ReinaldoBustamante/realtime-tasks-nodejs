@@ -186,7 +186,7 @@ revisar las terminales clientes y observar el evento emitido `{ type, payload }`
         ```
         curl -X PUT http://localhost:3000/api/tasks/1 \
         -H "Content-Type: application/json" \
-        -d '{"status": "completed"}'
+        -d '{"status": "completada"}'
         ```
 
 - DELETE /tasks/:id
