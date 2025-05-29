@@ -113,9 +113,36 @@ Esto construira y levantará automaticamente los contenedores definidos en `dock
 - API: http://localhost:3000/api
 - Interfaz web: http://localhost:8080
 
-#### Probar WebSockets
-### Ejecucion solo de la API
-#### Probar WebSockets
+### Ejecucion manual de la API.
+Accede al directorio `realtime-tasks-api/`
+```
+cd realtime-tasks-api
+```
+
+Ejecute la aplicacion utilizando los script definidos en `package.json`
+```
+npm run dev
+```
+La API estara corriendo en el puerto 3000 y se podra acceder a travez de http://localhost:3000/api
+
+
+#### Probar WebSockets sin frontend
+Para probar WebSockets sin una interfaz grafica, es necesario utilizar herramientas como `wscat` el cual simula un cliente. Para hacer esto instale la herramienta mencionada
+```
+sudo npm install -g wscat
+```
+Conectece al websocket desde multiples ventanas de la terminal
+```
+wscat -c ws://localhost:3000/api
+```
+En otra terminal realice peticiones http mediante la herramienta de su preferencia, para esto se utilizara curl
+```
+curl -X POST http://localhost:3000/api/tasks \
+-H "Content-Type: application/json" \
+-d '{"title": "Nueva tarea"}'
+```
+revisar las terminales clientes y observar el evento emitido `{ type, payload }`
+
 ### Endpoints
 - GET /tasks
     - **Descripcion**: Obtiene la lista de tareas del sistema
@@ -137,8 +164,7 @@ Esto construira y levantará automaticamente los contenedores definidos en `dock
     - **Ejemplo de request**:
 
         ```
-        curl \ 
-        -X POST http://localhost:3000/api/tasks \ 
+        curl -X POST http://localhost:3000/api/tasks \
         -H "Content-Type: application/json" \
         -d '{"title": "Nueva tarea"}'
         ```
