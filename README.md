@@ -1,9 +1,9 @@
 # realtime-tasks-nodejs
 
-Aplicación para gestionar tareas en tiempo real con WebSockets. Construida con Node.js y Express
+Aplicación en tiempo real para gestionar tareas, desarrollada con Node.js, Express y WebSockets
 
 ## 📋 Características
-- CRUD completo de tareas
+- CRUD completo
 - Interfaz simple para probar la API
 - Comunicación en tiempo real via websockets.
 - Base de datos con SQLite.
@@ -18,7 +18,7 @@ Aplicación para gestionar tareas en tiempo real con WebSockets. Construida con 
 ```bash
 realtime-tasks-nodejs
 │
-├── docker-compose.yml                  # Configuracion de docker-compose para levantar múltiples contenedores
+├── docker-compose.yml                  # Configuración de docker-compose para levantar múltiples contenedores
 ├── .env.template                       # Plantilla de variables de entorno necesarias para la ejecución de la aplicación
 ├── .gitignore  
 ├── realtime-tasks-api/
@@ -32,7 +32,7 @@ realtime-tasks-nodejs
 │   │   ├── app.ts                      # Punto de entrada principal de la aplicación
 │   │   ├── config/
 │   │   │   └── db/  
-│   │   │       └── connection.ts       # Creacion de la instancia PrismaClient para interactuar con la base de datos
+│   │   │       └── connection.ts       # Creación de la instancia PrismaClient para interactuar con la base de datos
 │   │   ├── domain/  
 │   │   │   ├── dtos/  
 │   │   │   │   ├── createTask.dto.ts   # Validador y estructura para crear tareas
@@ -101,41 +101,41 @@ Para ejecutar la API manualmente, se deberá hacer lo siguiente:
     ``` 
 ## ▶️ Ejecución de la aplicación
 
-La ejecucion dependera de como se configuro el entorno. 
+La ejecución dependera de como se configuro el entorno. 
 
-### Ejecucion backend + frontend ( Docker ).
+### Ejecución backend + frontend ( Docker ).
 Ejecute el siguiente comando en la raiz del proyecto.
 ```
 docker compose up
 ```
 
-Esto construira y levantará automaticamente los contenedores definidos en `docker-compose.yml`. Una vez levantados los servicios se podra acceder mediante:
+Esto construirá y levantará automáticamente los contenedores definidos en docker-compose.yml. Luego podrás acceder desde:
 - API: http://localhost:3000/api
 - Interfaz web: http://localhost:8080
 
-### Ejecucion manual de la API.
+### Ejecución manual de la API.
 Accede al directorio `realtime-tasks-api/`
 ```
 cd realtime-tasks-api
 ```
 
-Ejecute la aplicacion utilizando los script definidos en `package.json`
+Ejecute la aplicación utilizando los script definidos en `package.json`
 ```
 npm run dev
 ```
-La API estara corriendo en el puerto 3000 y se podra acceder a travez de http://localhost:3000/api
+La API estará corriendo en el puerto 3000 y podrás acceder a través de http://localhost:3000/api
 
 
 #### Probar WebSockets sin frontend
-Para probar WebSockets sin una interfaz grafica, es necesario utilizar herramientas como `wscat` el cual simula un cliente. Para hacer esto instale la herramienta mencionada
+Para probar WebSockets sin una interfaz gráfica, es necesario utilizar herramientas como wscat, el cual simula un cliente. Para hacer esto, instala la herramienta mencionada.
 ```
 sudo npm install -g wscat
 ```
-Conectece al websocket desde multiples ventanas de la terminal
+Conéctate al websocket desde múltiples ventanas de la terminal, para ello ejecuta el siguiente comando en cada ventana.
 ```
 wscat -c ws://localhost:3000/api
 ```
-En otra terminal realice peticiones http mediante la herramienta de su preferencia, para esto se utilizara curl
+Realiza peticiones HTTP mediante la herramienta de tu preferencia; para esto, se utilizará curl.
 ```
 curl -X POST http://localhost:3000/api/tasks \
 -H "Content-Type: application/json" \
@@ -158,8 +158,8 @@ revisar las terminales clientes y observar el evento emitido `{ type, payload }`
     - **Campos (JSON)**:
         | Campo     | Tipo    | Requerido | Descripción                           |
         |---------------|---------|-----------|---------------------------------------|
-        | `title`          | string  | Sí        | ID de la tarea                        |
-        | `description`          | string  | No        | Descripcion de la tarea                      |
+        | `title`          | string  | Sí        | Enunciado de la tarea                        |
+        | `description`          | string  | No        | Descripción de la tarea                      |
         | `status`          | string  | No        | Estado de la tarea (pendiente o completada)                        |
     - **Ejemplo de request**:
 
@@ -171,22 +171,22 @@ revisar las terminales clientes y observar el evento emitido `{ type, payload }`
 - PUT /tasks/:id
     - **Descripcion**: Actualiza una tarea existente
     - **Methodo HTTP**: PUT
-    - **Parametros de la url**:
+    - **Parametros de la URL**:
         | Parametro     | Tipo    | Requerido | Descripción                           |
         |---------------|---------|-----------|---------------------------------------|
         | `id`          | int  | Sí        | ID de la tarea                        |
     - **Campos (JSON)**:
         | Campo     | Tipo    | Requerido | Descripción                           |
         |---------------|---------|-----------|---------------------------------------|
-        | `title`          | string  | No        | ID de la tarea                        |
-        | `description`          | string  | No        | Descripcion de la tarea                      |
+        | `title`          | string  | No        | Enunciado de la tarea                        |
+        | `description`          | string  | No        | Descripción de la tarea                      |
         | `status`          | string  | No        | Estado de la tarea (pendiente o completada)                        |
     - **Ejemplo de request**:
 
         ```
-        curl -X PUT http://localhost:3000/api/tasks/id \
+        curl -X PUT http://localhost:3000/api/tasks/1 \
         -H "Content-Type: application/json" \
-        -d '{"title": "Nueva tarea actualizada", "status": "completed"}'
+        -d '{"status": "completed"}'
         ```
 
 - DELETE /tasks/:id
@@ -200,5 +200,5 @@ revisar las terminales clientes y observar el evento emitido `{ type, payload }`
     - **Ejemplo de request**:
 
         ```
-        curl -X DELETE http://localhost:3000/api/tasks/id
+        curl -X DELETE http://localhost:3000/api/tasks/1
         ```
